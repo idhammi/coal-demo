@@ -11,37 +11,48 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.coaldemo.config.LoginConfig
+import com.example.coaldemo.config.NetworkConfigProvider
+import com.example.coaldemo.config.OnBoardingConfig
 import com.example.coaldemo.ui.theme.CoalDemoTheme
+import com.telkom.coal.core.network.base.NetworkConfig
+import com.telkom.coal.core.network.retrofit.url.BaseUrlProvider
+import com.telkom.coal.core.ui.config.UiConfig
+import com.telkom.coal.core.ui.config.UiConfigProvider
+import com.telkom.coal.core.ui.navigation.RootNav
+import com.telkom.coal.framework.screen.CoalFramework
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class MainActivity : ComponentActivity() {
+@AndroidEntryPoint
+class MainActivity : ComponentActivity(),
+    NetworkConfig by NetworkConfigProvider(),
+    UiConfig by UiConfigProvider() {
+
+    @Inject
+    lateinit var baseUrlProvider: BaseUrlProvider
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            baseUrlProvider.setBaseUrl(getBaseUrl())
+            val rootNav = RootNav(rememberNavController())
+
+            registerCoalConfig(
+                OnBoardingConfig(),
+                LoginConfig()
+            )
             CoalDemoTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                Scaffold(modifier = Modifier.fillMaxSize()) { paddingValue ->
+                    CoalFramework(
+                        modifier = Modifier.padding(paddingValue),
+                        configs = uiConfigs,
+                        rootNav = rootNav
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CoalDemoTheme {
-        Greeting("Android")
     }
 }

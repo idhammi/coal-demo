@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+
+    id("org.jetbrains.kotlin.plugin.compose")
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -50,6 +54,15 @@ android {
 }
 
 dependencies {
+
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    ksp("com.google.dagger:hilt-compiler:2.51.1")
+
+    implementation("com.telkom.legion.compose:android-compose-component:2.0.0")
+    implementation("com.telkom.coal:core:0.0.1")
+    implementation("com.telkom.coal:framework:0.0.1")
+    implementation("com.telkom.coal.feature:onboarding:0.0.1")
+    implementation("com.telkom.coal.feature:login:0.0.1")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
