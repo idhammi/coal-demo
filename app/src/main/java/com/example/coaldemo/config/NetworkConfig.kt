@@ -1,11 +1,11 @@
 package com.example.coaldemo.config
 
-import com.telkom.coal.core.network.base.NetworkConfig
+import com.telkom.coal.core.network.base.NetworkConfigProvider
 
-class NetworkConfigProvider: NetworkConfig {
+class NetworkConfig: NetworkConfigProvider {
 
     override fun getBaseUrl(): String {
-        return "https://api-engine-two.vercel.app/"
+        return "https://coal.wiremockapi.cloud/"
     }
 
 }

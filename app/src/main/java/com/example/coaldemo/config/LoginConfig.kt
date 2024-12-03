@@ -1,25 +1,26 @@
 package com.example.coaldemo.config
 
-import androidx.compose.ui.graphics.Color
 import com.example.coaldemo.R
+import com.telkom.coal.core.ui.config.ConfigSource
 import com.telkom.coal.core.ui.config.login.LoginConfigProvider
+import com.telkom.coal.core.ui.config.login.LoginType
 
 class LoginConfig : LoginConfigProvider {
 
-    override fun getHeaderIcon() = R.drawable.ic_launcher_foreground
-
-    override fun getButtonLoginColor() = Color.Green
-
-    override fun getHeaderTitle() = "Coal Demo Login"
-
-    override fun showForgotPassword() = false
-
-    override fun getEmailLabel(): String? {
-        return "Email"
+    override fun configSource(): ConfigSource {
+        return ConfigSource.LOCAL
     }
 
-    override fun getEmailPlaceholder(): String? {
-        return "Enter your email"
+    override fun headerIcon() = R.drawable.ic_launcher_foreground
+
+    override fun headerTitle() = "Coal Demo Login"
+
+    override fun loginType(): LoginType {
+        return LoginType.EMAIL
+    }
+
+    override fun otpVerificationEnabled(): Boolean {
+        return true
     }
 
 }
