@@ -59,7 +59,6 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.51.1")
     ksp("com.google.dagger:hilt-compiler:2.51.1")
 
-    //implementation("com.telkom.legion.compose:android-compose-component:2.0.0")
     implementation("com.telkom.coal:framework:0.0.3")
 
     implementation(libs.androidx.core.ktx)

@@ -5,7 +5,6 @@ import com.telkom.coal.core.ui.config.register.RegisterConfigProvider
 
 class RegisterConfig : RegisterConfigProvider {
 
-    override fun configSource(): ConfigSource {
-        return ConfigSource.LOCAL
-    }
+    override fun configSource() = ConfigSource.LOCAL
+
 }

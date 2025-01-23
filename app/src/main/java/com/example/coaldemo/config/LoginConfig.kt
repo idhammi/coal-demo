@@ -7,20 +7,12 @@ import com.telkom.coal.core.ui.config.login.LoginType
 
 class LoginConfig : LoginConfigProvider {
 
-    override fun configSource(): ConfigSource {
-        return ConfigSource.LOCAL
-    }
+    override fun configSource() = ConfigSource.LOCAL
 
     override fun headerIcon() = R.drawable.ic_launcher_foreground
 
-    override fun headerTitle() = "Coal Demo Login"
+    override fun loginType() = LoginType.EMAIL
 
-    override fun loginType(): LoginType {
-        return LoginType.EMAIL
-    }
-
-    override fun otpVerificationEnabled(): Boolean {
-        return true
-    }
+    override fun otpVerificationEnabled() = true
 
 }
